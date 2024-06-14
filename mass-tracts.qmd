@@ -1,0 +1,15 @@
+---
+title: "mass-tracts"
+format: html
+---
+
+```{r}
+#| message: false
+library(tidyverse)
+library(dplyr)
+```
+
+```{r}
+mass-tracts <- read_csv("data/mass-tracts.csv")
+```
+
