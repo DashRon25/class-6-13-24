@@ -1,15 +1,32 @@
 ---
-title: "mass-tracts"
 format: html
+execute:
+  echo: false
 ---
 
 ```{r}
 #| message: false
 library(tidyverse)
-library(dplyr)
 ```
 
 ```{r}
-mass-tracts <- read_csv("data/mass-tracts.csv")
+tracts <- read_csv("data/mass-tracts.csv", show_col_types = FALSE)
+
+```
+
+```{r}
+tracts |> drop_na() |>  ggplot(aes(x = med_income, fill = race)) + 
+  geom_density(alpha = .5, bw = 25000) + 
+  scale_x_continuous(labels = scales::dollar_format()) + labs(
+    title = "Median income for Massachusetts Census Tracts", 
+    subtitle = "The richest tracts are white",
+    caption = "The race of each tract is determined by the most numerous racial group
+    present in that tract. Data from the American Community Survey 2022.", 
+    x = "Median Income", y = NULL, fill = "Race") + 
+  theme_minimal() + 
+  theme(
+  axis.text.y = element_blank(), 
+  aspect.ratio = .4
+  )
 ```
 
